@@ -30,7 +30,11 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
         </meal-display>
       </div>
       <div class="col-sm-3 col-sm-offset-1">
-        <meal-details *ngIf="selectedMeal" [meal]="selectedMeal"></meal-details>
+        <meal-details
+          *ngIf="selectedMeal"
+          [meal]="selectedMeal"
+          (onEditDetailsClick)="taskEditClicked($event)">
+        </meal-details>
       </div>
     </div>
     <div class="row">
@@ -38,10 +42,7 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
         <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
       </div>
       <div class="col-sm-6">
-
-        <edit-meal-details *ngIf="selectedMeal" [meal]="selectedMeal">
-        </edit-meal-details>
-
+        <edit-meal-details *ngIf="mealToEdit" [meal]="mealToEdit"></edit-meal-details>
       </div>
     </div>
   `
@@ -50,6 +51,7 @@ export class MealListComponent {
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
   public selectedMeal: Meal;
+  public mealToEdit: Meal;
   public filterCalorieLevel: string;
   constructor() {
     this.onMealSelect = new EventEmitter();
@@ -58,6 +60,9 @@ export class MealListComponent {
     console.log(clickedMeal);
     this.selectedMeal = clickedMeal;
     this.onMealSelect.emit(clickedMeal);
+  }
+  taskEditClicked(selectedMeal: Meal): void {
+    this.mealToEdit = selectedMeal;
   }
   createMeal(userInput): void {
     this.mealList.push(

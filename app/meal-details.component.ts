@@ -1,9 +1,10 @@
-import { Component } from 'angular2/core';
+import { Component, EventEmitter } from 'angular2/core';
 import { Meal } from './meal.model';
 
 @Component({
   selector: 'meal-details',
   inputs: ['meal'],
+  outputs: ["onEditDetailsClick"],
   template: `
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -12,12 +13,18 @@ import { Meal } from './meal.model';
       <div class="panel-body">
         <p>{{ meal.details }}</p>
         <p>Calories: {{ meal.calories }}</p>
-        <button class="btn btn-warning btn-sm">Edit Meal</button>
+        <button (click)="editDetails(meal)" class="btn btn-warning btn-sm">Edit Meal</button>
       </div>
     </div>
   `
 })
 
 export class MealDetailsComponent {
-  public task: Meal;
+  public onEditDetailsClick: EventEmitter<Meal>;
+  constructor() {
+    this.onEditDetailsClick = new EventEmitter();
+  }
+  editDetails(meal: Meal){
+    this.onEditDetailsClick.emit(meal);
+  }
 }
