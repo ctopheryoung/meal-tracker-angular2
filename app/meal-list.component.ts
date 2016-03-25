@@ -9,12 +9,18 @@ import { MealDetailsComponent } from './meal-details.component';
   inputs: ['mealList'],
   directives: [MealComponent, NewMealComponent, MealDetailsComponent],
   template: `
-  <meal-display *ngFor="#currentMeal of mealList"
-  (click)="mealClicked(currentMeal)"
-  [meal]="currentMeal">
-  </meal-display>
-  <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
-  <meal-details *ngIf="selectedMeal" [meal]="selectedMeal"></meal-details>
+    <div class="row">
+      <div class="col-sm-3">
+        <meal-display *ngFor="#currentMeal of mealList"
+        (click)="mealClicked(currentMeal)"
+        [meal]="currentMeal">
+        </meal-display>
+      </div>
+      <div class="col-sm-3 col-sm-offset-3">
+        <meal-details *ngIf="selectedMeal" [meal]="selectedMeal"></meal-details>
+      </div>
+    </div>
+    <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
   `
 })
 export class MealListComponent {
