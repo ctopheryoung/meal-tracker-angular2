@@ -3,30 +3,49 @@ import { MealComponent } from './meal.component';
 import { Meal } from './meal.model';
 import { NewMealComponent } from './new-meal.component';
 import { MealDetailsComponent } from './meal-details.component';
+import { MealCaloriePipe } from './meal-calorie.pipe';
 
 @Component({
   selector: 'meal-list',
   inputs: ['mealList'],
   directives: [MealComponent, NewMealComponent, MealDetailsComponent],
+  pipes: [MealCaloriePipe],
   template: `
     <div class="row">
-      <div class="col-sm-3">
-        <meal-display *ngFor="#currentMeal of mealList"
+
+      <div class="form-inline">
+        <label>Filter:</label>
+        <select class="form-control filter" (change)="onChange($event.target.value)">
+          <option value="all" selected="selected">All Foods</option>
+          <option value="low">300 calories or less</option>
+          <option value="notLow">300 calories or more</option>
+        </select>
+      </div>
+
+      <div class="col-sm-4 col-sm-offset-1">
+        <meal-display *ngFor="#currentMeal of mealList
+        | calories:filterCalorieLevel"
         (click)="mealClicked(currentMeal)"
         [meal]="currentMeal">
         </meal-display>
       </div>
-      <div class="col-sm-3 col-sm-offset-3">
+
+      <div class="col-sm-3 col-sm-offset-1">
         <meal-details *ngIf="selectedMeal" [meal]="selectedMeal"></meal-details>
       </div>
     </div>
-    <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
+    <div class="row">
+      <div class="col-sm-6">
+        <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
+      </div>
+    </div>
   `
 })
 export class MealListComponent {
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
   public selectedMeal: Meal;
+  public filterCalorieLevel: string;
   constructor() {
     this.onMealSelect = new EventEmitter();
   }
@@ -39,5 +58,8 @@ export class MealListComponent {
     this.mealList.push(
       new Meal(userInput[0], userInput[1], userInput[2], this.mealList.length)
     )
+  }
+  onChange(filterOption) {
+    this.filterCalorieLevel = filterOption;
   }
 }
