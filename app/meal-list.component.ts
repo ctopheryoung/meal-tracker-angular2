@@ -42,12 +42,15 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
         <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
       </div>
       <div class="col-sm-6">
-        <edit-meal-details *ngIf="mealToEdit" [meal]="mealToEdit"></edit-meal-details>
+        <edit-meal-details *ngIf="mealToEdit"
+        [meal]="mealToEdit"
+        [hidden]="editDisplayHidden"></edit-meal-details>
       </div>
     </div>
   `
 })
 export class MealListComponent {
+  public editDisplayHidden: boolean = true;
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
   public selectedMeal: Meal;
@@ -57,11 +60,12 @@ export class MealListComponent {
     this.onMealSelect = new EventEmitter();
   }
   mealClicked(clickedMeal: Meal): void {
-    console.log(clickedMeal);
+    this.editDisplayHidden = true;
     this.selectedMeal = clickedMeal;
     this.onMealSelect.emit(clickedMeal);
   }
   taskEditClicked(selectedMeal: Meal): void {
+    this.editDisplayHidden = false;
     this.mealToEdit = selectedMeal;
   }
   createMeal(userInput): void {
