@@ -1,12 +1,24 @@
-# Angular2 Project Template
+# Meal Tracker Fitness App
 
-#### March 22, 2016
+#### March 25, 2016
 
 #### By Chris Young
 
 ## Description
 
-A simple Angular2/Node.js web application template.
+A meal tracking app that allows a to log each food that they eat with some details about the meal and the number of calories for that portion.
+
+## How to use
+
+Ensure that you have Node Package Manager, Bower, Sass and Typescript installed, then run the following commands:
+
+* git clone https://github.com/ctopheryoung/meal-tracker-angular2
+* npm install
+* bower install
+* gulp build
+* gulp serve
+
+Then you should be able to access the development server on localhost:3000.
 
 ## Technologies Used
 
