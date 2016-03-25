@@ -1,4 +1,9 @@
-
 .filter {
   width: 100px;
+}
+
+.meal-item {
+  font-size: 26px;
+  cursor: pointer;
+  padding: 5px;
 }

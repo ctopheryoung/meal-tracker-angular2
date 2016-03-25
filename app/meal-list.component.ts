@@ -3,12 +3,13 @@ import { MealComponent } from './meal.component';
 import { Meal } from './meal.model';
 import { NewMealComponent } from './new-meal.component';
 import { MealDetailsComponent } from './meal-details.component';
+import { EditMealDetailsComponent } from './edit-meal-details.component';
 import { MealCaloriePipe } from './meal-calorie.pipe';
 
 @Component({
   selector: 'meal-list',
   inputs: ['mealList'],
-  directives: [MealComponent, NewMealComponent, MealDetailsComponent],
+  directives: [MealComponent, NewMealComponent, MealDetailsComponent, EditMealDetailsComponent],
   pipes: [MealCaloriePipe],
   template: `
     <div class="row">
@@ -21,7 +22,6 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
           <option value="notLow">300 calories or more</option>
         </select>
       </div>
-
       <div class="col-sm-4 col-sm-offset-1">
         <meal-display *ngFor="#currentMeal of mealList
         | calories:filterCalorieLevel"
@@ -29,7 +29,6 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
         [meal]="currentMeal">
         </meal-display>
       </div>
-
       <div class="col-sm-3 col-sm-offset-1">
         <meal-details *ngIf="selectedMeal" [meal]="selectedMeal"></meal-details>
       </div>
@@ -37,6 +36,12 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
     <div class="row">
       <div class="col-sm-6">
         <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
+      </div>
+      <div class="col-sm-6">
+
+        <edit-meal-details *ngIf="selectedMeal" [meal]="selectedMeal">
+        </edit-meal-details>
+
       </div>
     </div>
   `

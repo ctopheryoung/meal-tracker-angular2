@@ -12,6 +12,7 @@ import { Meal } from './meal.model';
       <div class="panel-body">
         <p>{{ meal.details }}</p>
         <p>Calories: {{ meal.calories }}</p>
+        <button class="btn btn-warning btn-sm">Edit Meal</button>
       </div>
     </div>
   `
