@@ -6,7 +6,7 @@
 
 ## Description
 
-A meal tracking app that allows a user to log each food that they eat that day with some details about the meal and the number of calories for that portion. Food items are added to a list that displays the name only, then they can click on the food to view more details and reveal and edit button that allows them to edit details of that food. 
+A meal tracking app that allows a user to log each food that they eat that day with some details about the meal and the number of calories for that portion. Food items are added to a list that displays the name only, then they can click on the food to view more details and reveal and edit button that allows them to edit details of that food. Users can also filter the list of things they have eaten by high-calorie and low-calorie. 
 
 ## How to use
 
