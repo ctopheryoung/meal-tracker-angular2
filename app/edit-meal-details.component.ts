@@ -5,9 +5,11 @@ import { Meal } from './meal.model';
   selector: 'edit-meal-details',
   inputs: ['meal'],
   template: `
-    <div class="meal-form">
-      <h3>Edit Selected {{ meal.name }} Details:</h3>
+    <div class="form-inline">
+      <h3>Edit Details for {{ meal.name }}:</h3>
+      <label>Meal details:</label>
       <input [(ngModel)]="meal.details" type="text-area" class="form-control">
+      <label>Meal Calories:</label>
       <input [(ngModel)]="meal.calories" type="number" class="form-control">
     </div>
   `

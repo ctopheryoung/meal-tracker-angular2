@@ -12,41 +12,37 @@ import { MealCaloriePipe } from './meal-calorie.pipe';
   directives: [MealComponent, NewMealComponent, MealDetailsComponent, EditMealDetailsComponent],
   pipes: [MealCaloriePipe],
   template: `
-    <div class="row">
-
-      <div class="form-inline">
-        <label>Filter:</label>
-        <select class="form-control filter" (change)="onChange($event.target.value)">
-          <option value="all" selected="selected">All Foods</option>
-          <option value="low">300 calories or less</option>
-          <option value="notLow">300 calories or more</option>
-        </select>
-      </div>
-      <div class="col-sm-4 col-sm-offset-1">
-        <meal-display *ngFor="#currentMeal of mealList
+  <div class="form-inline">
+    <label>Filter:</label>
+    <select class="form-control filter" (change)="onChange($event.target.value)">
+      <option value="all" selected="selected">All Foods</option>
+      <option value="low">300 calories or less</option>
+      <option value="notLow">300 calories or more</option>
+    </select>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-1">
+      <meal-display *ngFor="#currentMeal of mealList
         | calories:filterCalorieLevel"
         (click)="mealClicked(currentMeal)"
         [meal]="currentMeal">
-        </meal-display>
-      </div>
-      <div class="col-sm-3 col-sm-offset-1">
-        <meal-details
-          *ngIf="selectedMeal"
-          [meal]="selectedMeal"
-          (onEditDetailsClick)="taskEditClicked($event)">
-        </meal-details>
-      </div>
+      </meal-display>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
-      </div>
-      <div class="col-sm-6">
-        <edit-meal-details *ngIf="mealToEdit"
-        [meal]="mealToEdit"
-        [hidden]="editDisplayHidden"></edit-meal-details>
-      </div>
+    <div class="col-sm-3 col-sm-offset-1">
+      <meal-details
+        *ngIf="selectedMeal"
+        [meal]="selectedMeal"
+        (onEditDetailsClick)="taskEditClicked($event)">
+      </meal-details>
     </div>
+  </div>
+  
+  <edit-meal-details *ngIf="mealToEdit"
+  [meal]="mealToEdit"
+  [hidden]="editDisplayHidden">
+  </edit-meal-details>
+
+  <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
   `
 })
 export class MealListComponent {
